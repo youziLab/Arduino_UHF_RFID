@@ -11,40 +11,6 @@ void E720XD::begin()
   _serial->begin(_baudrate);
 }
 
-// // 打印单字节为16进制
-// void printHexByte(char *name, uint8_t value)
-// {
-//   Serial.print(name);
-//   Serial.print(":");
-//   Serial.print(value < 0x10 ? "0x0" : "0x");
-//   Serial.println(value, HEX);
-// }
-
-// // 打印字节数组为16进制
-// void printHexBytes(char *name, uint8_t *value, uint8_t len)
-// {
-//   Serial.print(name);
-//   Serial.print(":");
-//   Serial.print("0x");
-//   for (int i = 0; i < len; i++)
-//   {
-//     Serial.print(value[i] < 0x10 ? "0" : "");
-//     Serial.print(value[i], HEX);
-//   }
-//   Serial.println("");
-// }
-
-// // 打印两个字节组成的16位数为16进制
-// void printHexWord(char *name, uint8_t MSB, uint8_t LSB)
-// {
-//   Serial.print(name);
-//   Serial.print(":");
-//   Serial.print(MSB < 0x10 ? "0x0" : "0x");
-//   Serial.println(MSB, HEX);
-//   Serial.print(LSB < 0x10 ? "0" : "");
-//   Serial.println(LSB, HEX);
-// }
-
 // 计算校验和（从指定起始位置到结束位置的累加和）
 uint8_t E720XD::calculateChecksum(const uint8_t *data, size_t start,
                                   size_t end)
@@ -150,7 +116,7 @@ uint8_t E720XD::setSingleAntenna(uint8_t ANT)
   uint8_t commandFrame[9] = {0};
   commandFrame[0] = E720XD_FrameHeader;
   commandFrame[1] = FrameType_Command;
-  commandFrame[2] = 0x1B;                                  // 指令码
+  commandFrame[2] = CMD_AntSettingUp;                      // 指令码
   commandFrame[3] = 0x00;                                  // 参数长度MSB
   commandFrame[4] = 0x02;                                  // 参数长度LSB
   commandFrame[5] = 0x01;                                  // 参数数量
@@ -167,7 +133,7 @@ uint8_t E720XD::inventoryRepeatedlyANT(uint8_t ANT1, uint8_t ANT2)
   uint8_t commandFrame[10] = {0};
   commandFrame[0] = E720XD_FrameHeader;
   commandFrame[1] = FrameType_Command;
-  commandFrame[2] = 0x1B;                                  // 指令码
+  commandFrame[2] = CMD_AntSettingUp;                      // 指令码
   commandFrame[3] = 0x00;                                  // 参数长度MSB
   commandFrame[4] = 0x03;                                  // 参数长度LSB
   commandFrame[5] = 0x02;                                  // 参数数量

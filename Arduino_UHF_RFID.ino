@@ -6,15 +6,16 @@
 //     0x20, 0x00, 0xF0, 0x00,
 //     0x10, 0x2F, 0xBF, 0xFE};
 
+
+E720XD rfid(Serial1, 115200);
+
 uint8_t mask[12] = {
   0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00,
   0x00, 0x00, 0x00, 0x00
 };
 
-E720XD rfid(Serial1, 115200);
-String hwVer;
-String epc;
+
 // 通用等待命令执行完成的函数（模板实现，兼容lambda）
 template<typename CmdFunc>
 bool waitCmdFinish(CmdFunc sendCmd, const char *msg = nullptr, uint8_t retry = 3, uint8_t WaitTime = 100, unsigned long timeout = 1000) {

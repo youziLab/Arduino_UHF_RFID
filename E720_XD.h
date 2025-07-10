@@ -16,12 +16,6 @@ private:
   // 计算校验和
   uint8_t calculateCheckSum(uint8_t *buffer);
 
-  // 将数组转换为uint16_t
-  uint16_t arrayToUint16(uint8_t *array);
-
-  // 解析接收到的数据
-  bool parseReceivedData();
-
   // 判断数据是否有效
   bool dataIsValid();
 
